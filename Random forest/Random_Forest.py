@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
 
-
+# Decision Tree Model and Mean Absolute Error
 def get_mae(max_leaf_nodes, predictors_train,target_train, predictors_val, target_val):
     model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes,random_state =0)
     model.fit(predictors_train, target_train)
@@ -12,7 +12,7 @@ def get_mae(max_leaf_nodes, predictors_train,target_train, predictors_val, targe
     mae = mean_absolute_error(predicted_values, target_val)
     return mae
     
-#Random Foreset absolute error
+#Random Forest Model and Mean absolute error
 def get_mae_rf(predictors_train, target_train, predictors_val, target_val):
     model = RandomForestRegressor()
     model.fit(predictors_train, target_train)
@@ -20,7 +20,7 @@ def get_mae_rf(predictors_train, target_train, predictors_val, target_val):
     mae_rf = mean_absolute_error(predicted_values, target_val)
     return mae_rf
 
-#random forest predictions
+#random forest model predictions
 def prediction(train_X, train_y, test_X):
     model = RandomForestRegressor()
     model.fit(train_X, train_y)
@@ -33,7 +33,7 @@ data = pd.read_csv(main_file_path)
 #print(data.describe())
 #print(data.columns)
 
-'''output i.e SalePrice'''
+'''Target Attribute i.e SalePrice'''
 y = data.SalePrice
 #y.describe()
 
@@ -57,7 +57,7 @@ predict_model.fit(train_X, train_y)
 val_predictions = predict_model.predict(val_X)
 print(mean_absolute_error(val_y, val_predictions))
 
-
+# Figuring out the optimal value for leaf nodes
 for max_leaf_nodes in [5,50,500,5000]:
     print("Max leaf nodes",max_leaf_nodes,"Mean Absolute Error",get_mae(max_leaf_nodes,train_X, train_y, val_X, val_y))
     
